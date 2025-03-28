@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MindLink</title>
+    <style>
+      body {
+        font-family: "Verdana", sans-serif;
+        background: #222;
+        color: #f1f1f1;
+        text-align: center;
+        padding: 20px;
+        min-height: 100vh;
+      }
+      .container {
+        background: #121111;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.2);
+        margin: 20px auto;
+        width: 90%;
+        max-width: 600px;
+      }
+      .tabs button {
+        background: #06af0e;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        margin: 5px;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+      .tabs button:hover {
+        background: #a0a927;
+        transform: translate3d(0, -2px, 0);
+      }
+      .content {
+        display: none;
+      }
+      .active {
+        display: block;
+      }
+      .chat-box,
+      .mood-history,
+      .journal-entries,
+      .forum-posts {
+        text-align: left;
+        padding: 10px;
+        background: #444;
+        border-radius: 5px;
+      }
+      input,
+      textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        background: #555;
+        color: white;
+        border: none;
+        border-radius: 5px;
+      }
+      button {
+        padding: 10px;
+        background: #28a745;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+      button:hover {
+        background: #218838;
+        transform: translate3d(0, -2px, 0);
+      }
+      .emoji-container span {
+        font-size: 2rem;
+        cursor: pointer;
+        padding: 5px;
+      }
+      .features-container {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 20px;
+        background: #333;
+        position: relative;
+        top: 50px;
+        gap: 20px;
+      }
+      .feature {
+        width: 250px;
+        text-align: center;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background: grey;
+      }
+      .feature h3 {
+        color: #82d18a;
+        font-size: 16px;
+        font-weight: bolder;
+      }
+      .feature p {
+        color: white;
+        font-size: 14px;
+      }
+      .support-section {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        padding: 40px;
+        background-color: #121212;
+      }
+      .support-box {
+        position: relative;
+        width: 400px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.2);
+        text-align: center;
+      }
+      .support-box img {
+        width: 100%;
+        height: auto;
+        display: block;
+        filter: brightness(0.7);
+      }
+      .text-overlay {
+        position: absolute;
+        padding: 15px;
+        border-radius: 10px;
+        max-width: 80%;
+        bottom: 50%;
+        left: 50%;
+      }
+      .text-overlay h3 {
+        font-size: 14px;
+        margin: 10px 0;
+        color: burlywood;
+      }
+      .text-overlay p {
+        font-size: 16px;
+        color: white;
+      }
+      .support-box button {
+        padding: 10px 20px;
+        background: #06af0e;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        margin: 10px;
+        font-weight: bold;
+      }
+      .support-box button:hover {
+        background: #a0a927;
+      }
+      footer {
+        background: #222;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+        margin-top: auto;
+      }
+
+      .footer-container {
+        max-width: 800px;
+        margin: auto;
+      }
+
+      .social-icons a {
+        display: inline-block;
+        margin: 0 10px;
+      }
+
+      .social-icons img {
+        width: 30px;
+        height: 30px;
+        transition: transform 0.3s ease;
+      }
+
+      .social-icons img:hover {
+        transform: scale(1.2);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>MindLink - You are not alone</h1>
+    <p>
+      We understand life is a journey with challenges and it can be difficult at
+      times, and we're here to support you on your path to wellness. Whether you
+      are facing mental health struggles, emotional challenges, alcohol or drug
+      use issues, or just need someone to talk to, we are here for you.
+    </p>
+    <div class="tabs">
+      <button onclick="switchTab('moodTracker')">Mood Tracker</button>
+      <button onclick="switchTab('call')">Call</button>
+      <button onclick="switchTab('chatbot')">Chat</button>
+      <button onclick="switchTab('forum')">Community</button>
+      <button onclick="switchTab('journal')">Journal</button>
+      <button onclick="switchTab('resources')">Resources</button>
+    </div>
+
+    <div id="moodTracker" class="container content active">
+      <h2>Mood Tracker</h2>
+      <div class="emoji-container">
+        <span onclick="logMood('😃')">😃</span>
+        <span onclick="logMood('😔')">😔</span>
+        <span onclick="logMood('😠')">😠</span>
+      </div>
+      <ul id="moodList" class="mood-history"></ul>
+    </div>
+
+    <div id="call" class="container content">
+      <h2>Call</h2>
+      <button onclick="makeCall()">Make Call</button>
+    </div>
+
+    <div id="chatbot" class="container content">
+      <h2>Chat</h2>
+      <div id="chatBox" class="chat-box"></div>
+      <input type="text" id="userInput" placeholder="Talk to MindLink..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <div id="journal" class="container content">
+      <h2>Gratitude Journal</h2>
+      <textarea
+        id="journalEntry"
+        placeholder="What made you happy today?"
+      ></textarea>
+      <button onclick="addEntry()">Save</button>
+      <ul id="journalList" class="journal-entries"></ul>
+    </div>
+
+    <div id="forum" class="container content">
+      <h2>Community Forum</h2>
+      <input type="text" id="postTitle" placeholder="Title" />
+      <textarea
+        id="postContent"
+        placeholder="Share your thoughts..."
+      ></textarea>
+      <button onclick="addPost()">Post</button>
+      <div id="forumPosts" class="forum-posts"></div>
+    </div>
+
+    <div id="resources" class="container content">
+      <h2>Additional Resources</h2>
+      <ul>
+        <li>
+          <a href="https://www.mentalhealth.org/" target="_blank" rel="noopener"
+            >Mental Health Resources</a
+          >
+        </li>
+        <li>
+          <a href="hhttps://mental.health.go.ke/" target="_blank"
+            >Mental Health Kenya</a
+          >
+        </li>
+        <li>
+          <a href="https://www.healthyplace.com/" target="_blank" rel="noopener"
+            >Healthy Place</a
+          >
+        </li>
+      </ul>
+    </div>
+    <section class="support-section">
+      <div class="support-box">
+        <img src="/image/PDO.jpg" alt="support" />
+        <h3>Professional Support</h3>
+        <p>Get in touch with our proffesional therapist</p>
+        <button>Contact Us</button>
+      </div>
+      <div class="support-box">
+        <img src="/image/CP.jpg" alt="Community" />
+        <h3>Community Interaction</h3>
+        <p>Connect with others who are going through similar experiences</p>
+        <button>Join Community</button>
+      </div>
+    </section>
+    <section class="therapist-section">
+      <div class="therapist-container">
+        <div class="therapist-text">
+          <h3>Why Choose Us</h3>
+          <h4>Professional and qualified therapists you can trust</h4>
+          <p>
+            We have a team of experienced therapists who can help you with a
+            range of issues including depression, anxiety, relationships,
+            trauma, grief, and more. With our therapists, you get the same
+            professionalism and quality you would expect from an in-office
+            therapist, but with the ability to communicate when and how you
+            want.
+          </p>
+        </div>
+        <div class="therapist-image">
+          <img src="/image/G.jpg" alt="therapist" />
+        </div>
+        <div class="how-it-works">
+          <h3>How it works</h3>
+          <p>
+            Answer a few questions to find out what type of therapy is right for
+            you. Get matched with a therapist based on your needs and
+            preferences. Schedule a session at a time that works for you.
+            Connect with your therapist via secure video chat, phone call or
+            messaging. We encourage open communication and share your thoughts
+            and feelings with your therapist.
+          </p>
+        </div>
+        <div>
+          <img src="/image/oncall.jpg" alt="oncall" />
+        </div>
+        <div>
+          <h3>Therapy when you need it</h3>
+          <p>
+            You can message your therapist anytime and anywhere, from your
+            smartphone or the web. You can also schedule a live video session
+            with your therapist. Our therapists are available 24/7 to provide
+            support and guidance when you need it most.
+          </p>
+        </div>
+      </div>
+    </section>
+    <div class="features-container">
+      <div class="feature">
+        <h3>Best Professional Support</h3>
+        <p>
+          Our qualified and eperienced proffesional team of mental health
+          professionals are here to provide you with the support and guidance
+          you need to overcome life's challenges.
+        </p>
+      </div>
+      <div class="feature">
+        <h3>Community Interaction</h3>
+        <p>
+          Connect with others who are going through similar experiences and
+          share your journey to wellness in a supportive and understanding
+          environment.
+        </p>
+      </div>
+      <div class="feature">
+        <h3>Customized Confidential Solutions</h3>
+        <p>
+          Our solutions are based on your individual needs and preferences,
+          ensuring you receive the best possible support while keeping your
+          shared thoughts and feelings confidential.
+        </p>
+      </div>
+      <div class="feature">
+        <h3>Convinient with 24/7 Support</h3>
+        <p>
+          Our team is available 24/7 to provide support and guidance when you
+          need it most. Whether you are facing a crisis or just need someone to
+          talk to, we are here for you.
+        </p>
+      </div>
+    </div>
+
+    <script>
+      function switchTab(tabId) {
+        document
+          .querySelectorAll(".content")
+          .forEach((tab) => tab.classList.remove("active"));
+        document.getElementById(tabId).classList.add("active");
+      }
+
+      function logMood(mood) {
+        let moodList = document.getElementById("moodList");
+        let listItem = document.createElement("li");
+        listItem.textContent = `${new Date().toLocaleTimeString()} - ${mood}`;
+        moodList.appendChild(listItem);
+      }
+
+      function sendMessage() {
+        let userInput = document.getElementById("userInput").value;
+        if (!userInput.trim()) return;
+        let chatBox = document.getElementById("chatBox");
+        chatBox.innerHTML += `<p><strong>You:</strong> ${userInput}</p>`;
+        setTimeout(
+          () =>
+            (chatBox.innerHTML += `<p><strong>MindLink:</strong> ${getBotResponse(
+              userInput
+            )}</p>`),
+          1000
+        );
+        document.getElementById("userInput").value = "";
+      }
+
+      function getBotResponse(input) {
+        const responses = {
+          hello: "Hi there! How can I help you?",
+          sad: "It's okay to feel sad. Do you want to talk about it?",
+          default: "Tell me more!",
+        };
+        return responses[input.toLowerCase()] || responses["default"];
+      }
+
+      function addEntry() {
+        let entry = document.getElementById("journalEntry").value;
+        if (!entry.trim()) return;
+        let list = document.getElementById("journalList");
+        let listItem = document.createElement("li");
+        listItem.textContent = entry;
+        list.appendChild(listItem);
+        document.getElementById("journalEntry").value = "";
+      }
+
+      function addPost() {
+        let title = document.getElementById("postTitle").value;
+        let content = document.getElementById("postContent").value;
+        if (!title.trim() || !content.trim()) return;
+        let forum = document.getElementById("forumPosts");
+        let postDiv = document.createElement("div");
+        postDiv.innerHTML = `<h4>${title}</h4><p>${content}</p>`;
+        forum.prepend(postDiv);
+        document.getElementById("postTitle").value = "";
+        document.getElementById("postContent").value = "";
+      }
+    </script>
+  </body>
+</html>
