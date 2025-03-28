@@ -4,188 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MindLink</title>
-    <style>
-      body {
-        font-family: "Verdana", sans-serif;
-        background: #222;
-        color: #f1f1f1;
-        text-align: center;
-        padding: 20px;
-        min-height: 100vh;
-      }
-      .container {
-        background: #121111;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.2);
-        margin: 20px auto;
-        width: 90%;
-        max-width: 600px;
-      }
-      .tabs button {
-        background: #06af0e;
-        color: white;
-        border: none;
-        padding: 10px 15px;
-        margin: 5px;
-        cursor: pointer;
-        border-radius: 5px;
-      }
-      .tabs button:hover {
-        background: #a0a927;
-        transform: translate3d(0, -2px, 0);
-      }
-      .content {
-        display: none;
-      }
-      .active {
-        display: block;
-      }
-      .chat-box,
-      .mood-history,
-      .journal-entries,
-      .forum-posts {
-        text-align: left;
-        padding: 10px;
-        background: #444;
-        border-radius: 5px;
-      }
-      input,
-      textarea {
-        width: 100%;
-        padding: 10px;
-        margin-top: 10px;
-        background: #555;
-        color: white;
-        border: none;
-        border-radius: 5px;
-      }
-      button {
-        padding: 10px;
-        background: #28a745;
-        color: white;
-        border: none;
-        cursor: pointer;
-        border-radius: 5px;
-      }
-      button:hover {
-        background: #218838;
-        transform: translate3d(0, -2px, 0);
-      }
-      .emoji-container span {
-        font-size: 2rem;
-        cursor: pointer;
-        padding: 5px;
-      }
-      .features-container {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        padding: 20px;
-        background: #333;
-        position: relative;
-        top: 50px;
-        gap: 20px;
-      }
-      .feature {
-        width: 250px;
-        text-align: center;
-        padding: 15px;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        background: grey;
-      }
-      .feature h3 {
-        color: #82d18a;
-        font-size: 16px;
-        font-weight: bolder;
-      }
-      .feature p {
-        color: white;
-        font-size: 14px;
-      }
-      .support-section {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        padding: 40px;
-        background-color: #121212;
-      }
-      .support-box {
-        position: relative;
-        width: 400px;
-        border-radius: 10px;
-        box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.2);
-        text-align: center;
-      }
-      .support-box img {
-        width: 100%;
-        height: auto;
-        display: block;
-        filter: brightness(0.7);
-      }
-      .text-overlay {
-        position: absolute;
-        padding: 15px;
-        border-radius: 10px;
-        max-width: 80%;
-        bottom: 50%;
-        left: 50%;
-      }
-      .text-overlay h3 {
-        font-size: 14px;
-        margin: 10px 0;
-        color: burlywood;
-      }
-      .text-overlay p {
-        font-size: 16px;
-        color: white;
-      }
-      .support-box button {
-        padding: 10px 20px;
-        background: #06af0e;
-        color: white;
-        border: none;
-        cursor: pointer;
-        border-radius: 5px;
-        margin: 10px;
-        font-weight: bold;
-      }
-      .support-box button:hover {
-        background: #a0a927;
-      }
-      footer {
-        background: #222;
-        color: white;
-        text-align: center;
-        padding: 20px 0;
-        margin-top: auto;
-      }
-
-      .footer-container {
-        max-width: 800px;
-        margin: auto;
-      }
-
-      .social-icons a {
-        display: inline-block;
-        margin: 0 10px;
-      }
-
-      .social-icons img {
-        width: 30px;
-        height: 30px;
-        transition: transform 0.3s ease;
-      }
-
-      .social-icons img:hover {
-        transform: scale(1.2);
-      }
-    </style>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <h1>MindLink - You are not alone</h1>
-    <p>
+    <header>
+      <h1>MindLink</h1>
+      <h2>Your Mental Health Companion</h2>
+    </header>
+        <p>
       We understand life is a journey with challenges and it can be difficult at
       times, and we're here to support you on your path to wellness. Whether you
       are facing mental health struggles, emotional challenges, alcohol or drug
@@ -206,6 +32,7 @@
         <span onclick="logMood('😃')">😃</span>
         <span onclick="logMood('😔')">😔</span>
         <span onclick="logMood('😠')">😠</span>
+        <p>Select an emoji to log your mood</p>
       </div>
       <ul id="moodList" class="mood-history"></ul>
     </div>
@@ -248,18 +75,15 @@
       <ul>
         <li>
           <a href="https://www.mentalhealth.org/" target="_blank" rel="noopener"
-            >Mental Health Resources</a
-          >
+            >Mental Health Resources</a>
         </li>
         <li>
           <a href="hhttps://mental.health.go.ke/" target="_blank"
-            >Mental Health Kenya</a
-          >
+            >Mental Health Kenya</a>
         </li>
         <li>
           <a href="https://www.healthyplace.com/" target="_blank" rel="noopener"
-            >Healthy Place</a
-          >
+            >Healthy Place</a>
         </li>
       </ul>
     </div>
@@ -275,6 +99,15 @@
         <h3>Community Interaction</h3>
         <p>Connect with others who are going through similar experiences</p>
         <button>Join Community</button>
+      </div>
+      <div class="support-box">
+        <img src="image/Hands.jpg" alt="Friends" />
+        <h3>Friendly Invite</h3>
+        <p>
+          Through our friendly invite, you can invite your friends to join and become part of our
+          community for better mental health support.
+        </p>
+        <button>Invite</button>
       </div>
     </section>
     <section class="therapist-section">
@@ -353,67 +186,6 @@
         </p>
       </div>
     </div>
-
-    <script>
-      function switchTab(tabId) {
-        document
-          .querySelectorAll(".content")
-          .forEach((tab) => tab.classList.remove("active"));
-        document.getElementById(tabId).classList.add("active");
-      }
-
-      function logMood(mood) {
-        let moodList = document.getElementById("moodList");
-        let listItem = document.createElement("li");
-        listItem.textContent = `${new Date().toLocaleTimeString()} - ${mood}`;
-        moodList.appendChild(listItem);
-      }
-
-      function sendMessage() {
-        let userInput = document.getElementById("userInput").value;
-        if (!userInput.trim()) return;
-        let chatBox = document.getElementById("chatBox");
-        chatBox.innerHTML += `<p><strong>You:</strong> ${userInput}</p>`;
-        setTimeout(
-          () =>
-            (chatBox.innerHTML += `<p><strong>MindLink:</strong> ${getBotResponse(
-              userInput
-            )}</p>`),
-          1000
-        );
-        document.getElementById("userInput").value = "";
-      }
-
-      function getBotResponse(input) {
-        const responses = {
-          hello: "Hi there! How can I help you?",
-          sad: "It's okay to feel sad. Do you want to talk about it?",
-          default: "Tell me more!",
-        };
-        return responses[input.toLowerCase()] || responses["default"];
-      }
-
-      function addEntry() {
-        let entry = document.getElementById("journalEntry").value;
-        if (!entry.trim()) return;
-        let list = document.getElementById("journalList");
-        let listItem = document.createElement("li");
-        listItem.textContent = entry;
-        list.appendChild(listItem);
-        document.getElementById("journalEntry").value = "";
-      }
-
-      function addPost() {
-        let title = document.getElementById("postTitle").value;
-        let content = document.getElementById("postContent").value;
-        if (!title.trim() || !content.trim()) return;
-        let forum = document.getElementById("forumPosts");
-        let postDiv = document.createElement("div");
-        postDiv.innerHTML = `<h4>${title}</h4><p>${content}</p>`;
-        forum.prepend(postDiv);
-        document.getElementById("postTitle").value = "";
-        document.getElementById("postContent").value = "";
-      }
-    </script>
+    <script src="script.js"></script>
   </body>
 </html>

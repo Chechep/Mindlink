@@ -1,0 +1,181 @@
+body {
+    font-family: "Verdana", sans-serif;
+    background: #222;
+    color: #f1f1f1;
+    text-align: center;
+    padding: 20px;
+    padding-top: 120px;
+    min-height: 100vh;
+  }
+
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px 0;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    background-color: black;
+  }
+
+  h1 {
+    margin-bottom: 10px;
+    font-size: 24px;
+  }
+  h2 {
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-style: italic;
+  }
+  .container {
+    background: #121111;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.2);
+    margin: 20px auto;
+    width: 90%;
+    max-width: 600px;
+  }
+  .tabs button {
+    background: #06af0e;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  .tabs button:hover {
+    background: #a0a927;
+    transform: translate3d(0, -2px, 0);
+  }
+  .content {
+    display: none;
+  }
+  .active {
+    display: block;
+  }
+  .chat-box,
+  .mood-history,
+  .journal-entries,
+  .forum-posts {
+    text-align: left;
+    padding: 10px;
+    background: #444;
+    border-radius: 5px;
+  }
+  input,
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background: #555;
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+  button {
+    padding: 10px;
+    background: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  button:hover {
+    background: #218838;
+    transform: translate3d(0, -2px, 0);
+  }
+  .emoji-container span {
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 5px;
+  }
+  .features-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    background: #333;
+    position: relative;
+    top: 50px;
+    gap: 20px;
+  }
+
+  .feature:hover {
+    background: #222;
+  }
+  .feature {
+    width: 250px;
+    text-align: center;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: grey;
+  }
+  .feature h3 {
+    color: #82d18a;
+    font-size: 16px;
+    font-weight: bolder;
+  }
+  .feature p {
+    color: white;
+    font-size: 14px;
+  }
+  .support-section {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 40px;
+    background-color: #121212;
+  }
+  .support-box {
+    position: relative;
+    width: 400px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.2);
+    text-align: center;
+  }
+  .support-box img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: brightness(0.7);
+  }
+
+  .support-box:hover {
+    box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.5);
+    transform: translate3d(0, -2px, 0);
+  }
+  .text-overlay {
+    position: absolute;
+    padding: 15px;
+    border-radius: 10px;
+    max-width: 80%;
+    bottom: 50%;
+    left: 50%;
+  }
+  .text-overlay h3 {
+    font-size: 14px;
+    margin: 10px 0;
+    color: burlywood;
+  }
+  .text-overlay p {
+    font-size: 16px;
+    color: white;
+  }
+  .support-box button {
+    padding: 10px 20px;
+    background: #06af0e;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 10px;
+    font-weight: bold;
+  }
+  .support-box button:hover {
+    background: #a0a927;
+  }
